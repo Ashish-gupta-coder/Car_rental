@@ -71,7 +71,7 @@ gap-8 w-[90%] md:w-[750px] mx-auto">
   {/* Cards */}
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
 
-    {dummyCarData.map((car) => (
+    {dummyCarData.map((car)=>(
       <div
         key={car.id}
         className="bg-white rounded-2xl shadow-md overflow-hidden"
