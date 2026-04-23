@@ -58,7 +58,7 @@ gap-8 w-[90%] md:w-[750px] mx-auto">
 
     </div>
 
-    <div className="bg-gray-100 py-16">
+    <div className=" py-16">
 
   {/* Heading */}
   <div className="text-center mb-12">
@@ -71,51 +71,107 @@ gap-8 w-[90%] md:w-[750px] mx-auto">
   {/* Cards */}
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
 
-    {dummyCarData.map((car)=>(
-      <div
-        key={car.id}
-        className="bg-white rounded-2xl shadow-md overflow-hidden"
-      >
+   {dummyCarData.map((car) => (
+  <div
+    key={car.id}
+    className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
+  >
+    {/* Image */}
+    <div className="relative">
+      <img
+        src={car.image}
+        alt={car.name}
+        className="w-full h-52 object-cover"
+      />
 
-        {/* Image */}
-        <div className="relative">
-          <img
-            src={car.image}
-            alt={car.name}
-            className="w-full h-52 object-cover"
-          />
+      {/* Badge */}
+      <span className="absolute top-4 left-4 bg-blue-600 text-white text-sm px-3 py-1 rounded-full">
+        Available Now
+      </span>
 
-          {/* Badge */}
-          <span className="absolute top-4 left-4 bg-blue-600 text-white text-sm px-3 py-1 rounded-full">
-            Available Now
-          </span>
+      {/* Price */}
+      <span className="absolute bottom-4 right-4 bg-black text-white px-4 py-2 rounded-lg">
+        ${car.pricePerDay} / day
+      </span>
+    </div>
 
-          {/* Price */}
-          <span className="absolute bottom-4 right-4 bg-black text-white px-4 py-2 rounded-lg">
-            ${car.price} / day
-          </span>
-        </div>
+    {/* Content */}
+    <div className="p-5">
+      <h3 className="text-xl font-semibold">
+        {car.brand} <span>{car.model}</span>
+      </h3>
 
-        {/* Content */}
-        <div className="p-5">
-          <h3 className="text-lg font-semibold">{car.name}</h3>
-          <p className="text-gray-500 text-sm">
-            {car.type} • {car.year}
-          </p>
+      <p className="text-sm text-gray-500">
+        {car.category} • {car.year}
+      </p>
 
-          {/* Features */}
-          <div className="grid grid-cols-2 gap-3 mt-4 text-sm text-gray-600">
-            <span>👤 {car.seats} Seats</span>
-            <span>⛽ {car.fuel}</span>
-            <span>⚙️ {car.transmission}</span>
-            <span>📍 {car.location}</span>
-          </div>
-        </div>
+      {/* Features */}
+      <div className="grid grid-cols-2 gap-3 mt-4 text-sm text-gray-600">
+        
+        <span className="flex items-center gap-2">
+          <img src={assets.users_icon} className="w-4 h-4" alt="" />
+          {car.seating_capacity} Seats
+        </span>
+
+        <span className="flex items-center gap-2">
+          <img src={assets.fuel_icon} className="w-4 h-4" alt="" />
+          {car.fuel_type}
+        </span>
+
+        <span className="flex items-center gap-2">
+          <img src={assets.car_icon} className="w-4 h-4" alt="" />
+          {car.transmission}
+        </span>
+
+        <span className="flex items-center gap-2">
+          <img src={assets.location_icon} className="w-4 h-4" alt="" />
+          {car.location}
+        </span>
+
       </div>
-    ))}
+    </div>
+  </div>
+))}
+
+
+  </div>
+   <button className="px-6 py-2 border border-gray-300 rounded-lg font-medium hover:bg-gray-100 transition flex items-center gap-2 text-center mx-auto mt-24">
+    Explore all cars <span><img src={assets.arrow_icon} alt="" /></span>
+  </button>
+</div>
+
+<div className="w-full flex justify-center items-center py-16">
+  <div className="relative flex items-center justify-between max-w-6xl w-full bg-gradient-to-r from-blue-600 to-blue-300 rounded-2xl px-10 py-16 overflow-hidden">
+
+    {/* Left Content */}
+    <div className="max-w-md text-white">
+      <h2 className="text-3xl font-bold mb-4">
+        Do You Own a Luxury Car?
+      </h2>
+
+      <p className="text-sm leading-relaxed mb-6 opacity-90 font-semibold">
+        Monetize your vehicle effortlessly by listing it on CarRental.
+        We take care of insurance, driver verification and secure payments —
+        so you can earn passive income, stress-free.
+      </p>
+
+      <button className="bg-white text-blue-500 px-5 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
+        List your car
+      </button>
+    </div>
+
+    {/* Right Image */}
+    <div className="hidden md:block">
+      <img
+        src={assets.banner_car_image}
+        alt="car"
+        className="w-96 object-contain"
+      />
+    </div>
 
   </div>
 </div>
+
 </>
   );
 }
