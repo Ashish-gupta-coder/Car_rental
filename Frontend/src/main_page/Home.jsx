@@ -18,45 +18,51 @@ function Home() {
       </h1>
 
       {/* Search Box */}
-      <div className="mt-10 bg-white rounded-full shadow-md px-10 py-6 
-flex flex-col md:flex-row items-center justify-center md:justify-between 
-gap-8 w-[90%] md:w-[750px] mx-auto">
+      <div className="mt-10 bg-white md:rounded-full rounded-xl shadow-md px-6 md:px-10 py-6 
+flex flex-col md:flex-row md:items-center items-start 
+gap-5 md:gap-8 w-[90%] md:w-[750px] mx-auto">
 
   {/* Pickup Location */}
-  <div className="flex flex-col text-sm text-center md:text-left">
-    <span className="flex items-center justify-center md:justify-start gap-1 font-medium text-gray-700">
+  <div className="flex flex-col text-sm w-full">
+    <span className="flex items-center gap-1 font-medium text-gray-700">
       Pickup Location <IoIosArrowDown />
     </span>
     <span className="text-gray-400">Please select location</span>
   </div>
 
   {/* Pick-up Date */}
-  <div className="flex flex-col text-sm text-center md:text-left">
+  <div className="flex flex-col text-sm w-full">
     <span className="font-medium text-gray-700">Pick-up Date</span>
-    <input type="date" className="outline-none text-gray-400 text-center md:text-left" />
+    <input 
+      type="date" 
+      className="outline-none text-gray-400 mt-1"
+    />
   </div>
 
   {/* Return Date */}
-  <div className="flex flex-col text-sm text-center md:text-left">
+  <div className="flex flex-col text-sm w-full">
     <span className="font-medium text-gray-700">Return Date</span>
-    <input type="date" className="outline-none text-gray-400 text-center md:text-left" />
+    <input 
+      type="date" 
+      className="outline-none text-gray-400 mt-1"
+    />
   </div>
 
   {/* Search Button */}
-  <button className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">
+  <button className="w-full md:w-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">
     <FiSearch />
     Search
   </button>
 </div>
 
-      {/* Car Image */}
-      <div className="mt-12 w-full flex justify-center">
-        <img
-          src={assets.main_car}
-          alt="car"
-          className="w-[90%] md:w-[900px] object-contain"
-        />
-      </div>
+{/* Car Image */}
+<div className="mt-12 w-full flex justify-center">
+  <img
+    src={assets.main_car}
+    alt="car"
+    className="w-[100%] md:w-[900px] object-contain"
+  />
+</div>
 
     </div>
 
@@ -143,12 +149,14 @@ gap-8 w-[90%] md:w-[750px] mx-auto">
   </button>
 </div>
 
-<div className="w-full flex justify-center items-center py-16">
-  <div className="relative flex items-center justify-between max-w-6xl w-full bg-gradient-to-r from-blue-600 to-blue-300 rounded-2xl px-10 py-16 overflow-hidden">
+<div className="w-full flex justify-center items-center py-10 md:py-16">
+  <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between 
+  max-w-6xl w-[90%] bg-gradient-to-r from-blue-600 to-blue-300 
+  rounded-2xl px-6 md:px-10 py-10 md:py-16 overflow-hidden">
 
     {/* Left Content */}
     <div className="max-w-md text-white">
-      <h2 className="text-3xl font-bold mb-4">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">
         Do You Own a Luxury Car?
       </h2>
 
@@ -164,11 +172,11 @@ gap-8 w-[90%] md:w-[750px] mx-auto">
     </div>
 
     {/* Right Image */}
-    <div className="hidden md:block">
+    <div className="mt-8 md:mt-0 flex justify-center w-full md:w-auto">
       <img
         src={assets.banner_car_image}
         alt="car"
-        className="w-96 object-contain"
+        className="w-[250px] md:w-96 object-contain"
       />
     </div>
 
