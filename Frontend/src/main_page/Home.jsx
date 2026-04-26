@@ -4,8 +4,10 @@ import { IoIosArrowDown } from "react-icons/io";
 
 // import your car image here
 import { assets, dummyCarData } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <>
     <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-start pt-10">
@@ -71,10 +73,11 @@ gap-8 w-[90%] md:w-[750px] mx-auto">
   {/* Cards */}
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
 
-   {dummyCarData.map((car) => (
+{dummyCarData.map((car, index) => (
   <div
-    key={car.id}
-    className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
+    key={index}
+  onClick={() => navigate(`/car/${index}`)} 
+    className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
   >
     {/* Image */}
     <div className="relative">
@@ -171,7 +174,121 @@ gap-8 w-[90%] md:w-[750px] mx-auto">
 
   </div>
 </div>
+<div className="bg-gray-50">
 
+  {/* ================= Testimonials ================= */}
+  <div className="py-16 px-6">
+    <div className="text-center max-w-2xl mx-auto">
+      <h2 className="text-4xl font-bold">
+        What Our Customers Say
+      </h2>
+      <p className="text-gray-500 mt-4">
+        Discover why discerning travelers choose StayVenture for their luxury accommodations
+        around the world.
+      </p>
+    </div>
+
+    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      
+  {/* Card 1 */}
+  <div className="bg-white p-6 rounded-2xl shadow-md">
+    <div className="flex items-center gap-4">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" className="w-12 h-12 rounded-full" />
+      <div>
+        <h3 className="font-semibold">Emma Rodriguez</h3>
+        <p className="text-sm text-gray-500">Barcelona, Spain</p>
+      </div>
+    </div>
+
+    {/* Stars */}
+    <div className="flex gap-1 mt-4">
+      {Array(5).fill(0).map((_, i) => (
+        <img key={i} src={assets.star_icon} className="w-4 h-4" alt="star" />
+      ))}
+    </div>
+
+    <p className="text-gray-500 mt-4 text-sm leading-2">
+      "I've rented cars from various companies, but the experience with CarRental was exceptional."
+    </p>
+  </div>
+
+  {/* Card 2 */}
+  <div className="bg-white p-6 rounded-2xl shadow-md">
+    <div className="flex items-center gap-4">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" className="w-12 h-12 rounded-full" />
+      <div>
+        <h3 className="font-semibold">John Smith</h3>
+        <p className="text-sm text-gray-500">New York, USA</p>
+      </div>
+    </div>
+
+    {/* Stars */}
+    <div className="flex gap-1 mt-4">
+      {Array(5).fill(0).map((_, i) => (
+        <img key={i} src={assets.star_icon} className="w-4 h-4" alt="star" />
+      ))}
+    </div>
+
+    <p className="text-gray-500 mt-4 text-sm leading-2">
+      "CarRental made my trip so much easier. The car was delivered right to my door, and the customer service was fantastic!"
+    </p>
+  </div>
+
+  {/* Card 3 */}
+  <div className="bg-white p-6 rounded-2xl shadow-md">
+    <div className="flex items-center gap-4">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" className="w-12 h-12 rounded-full" />
+      <div>
+        <h3 className="font-semibold">Ava Johnson</h3>
+        <p className="text-sm text-gray-500">Sydney, Australia</p>
+      </div>
+    </div>
+
+    {/* Stars */}
+    <div className="flex gap-1 mt-4">
+      {Array(5).fill(0).map((_, i) => (
+        <img key={i} src={assets.star_icon} className="w-4 h-4" alt="star" />
+      ))}
+    </div>
+
+    <p className="text-gray-500 mt-4 text-sm leading-2">
+      "I highly recommend CarRental! Their fleet is amazing, and I always feel like I'm getting the best deal with excellent service."
+    </p>
+  </div>
+
+</div>
+  </div>
+
+  {/* ================= Newsletter ================= */}
+  <div className="py-28 px-6">
+    <div className="max-w-3xl mx-auto text-center">
+      
+      <h2 className="text-4xl font-bold">
+        Never Miss a Deal!
+      </h2>
+
+      <p className="text-gray-500 mt-4">
+        Subscribe to get the latest offers, new arrivals, and exclusive discounts
+      </p>
+
+      <div className="mt-8 flex items-center bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+        
+        <input
+          type="email"
+          placeholder="Enter your email id"
+          className="flex-1 px-5 py-4 outline-none text-sm"
+        />
+
+        <button className="bg-blue-600 text-white px-8 py-4 hover:bg-blue-700 transition">
+          Subscribe
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
 </>
   );
 }
