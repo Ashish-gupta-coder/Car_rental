@@ -1,14 +1,33 @@
 import React, { useState } from "react";
 import SignupModal from "./Signup";
+import { authContext } from "../Context/auth_context";
+import { useContext } from "react";
+import axios from "axios";
 
 const LoginModal = ({ close }) => {
-  const [showSignup, setShowSignup] = useState(false); // ✅ state added
+  const [showSignup, setShowSignup] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    let {serverUrl} = useContext(authContext) 
+
 
   // 👉 switch to signup
   if (showSignup) {
     return <SignupModal close={close} />;
   }
+const handleLogin = async () => {
+  try {
+    const result = await axios.post(`${serverUrl}/api/auth/login`, {
+      email,
+      password,
+    });
 
+    console.log(result.data);
+    close(); // Close the login modal
+  } catch (error) {
+    console.error("Error during signup:", error.response?.data || error.message);
+  }
+};
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
@@ -40,6 +59,8 @@ const LoginModal = ({ close }) => {
             type="email"
             placeholder="type here"
             className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-blue-400"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -50,6 +71,8 @@ const LoginModal = ({ close }) => {
             type="password"
             placeholder="type here"
             className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-blue-400"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
@@ -65,7 +88,7 @@ const LoginModal = ({ close }) => {
         </p>
 
         {/* Button */}
-        <button className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-2 rounded-md font-medium hover:opacity-90 transition">
+        <button className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-2 rounded-md font-medium hover:opacity-90 transition" onClick={handleLogin}>
           Login
         </button>
       </div>

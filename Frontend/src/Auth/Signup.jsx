@@ -1,13 +1,34 @@
 import React, { useState } from "react";
 import LoginModal from "./Login";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useContext } from "react";
+import { authContext } from "../Context/auth_context";
 const SignupModal = ({ close }) => {
-  const [showLogin, setShowLogin] = useState(false); // ✅ state
-
-  // 👉 switch to login
+  const [showLogin, setShowLogin] = useState(false); 
+  const navigate = useNavigate()
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let {serverUrl} = useContext(authContext)
   if (showLogin) {
     return <LoginModal close={close} />;
   }
+
+const handleSignup = async () => {
+  try {
+    const result = await axios.post(`${serverUrl}/api/auth/signup`, {
+      userName: name,
+      email,
+      password,
+    });
+
+    console.log(result.data);
+    close(); // Close the signup modal
+  } catch (error) {
+    console.error("Error during signup:", error.response?.data || error.message);
+  }
+};
 
   return (
     <div
@@ -40,6 +61,8 @@ const SignupModal = ({ close }) => {
             type="text"
             placeholder="type here"
             className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-blue-400"
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
           />
         </div>
 
@@ -50,6 +73,8 @@ const SignupModal = ({ close }) => {
             type="email"
             placeholder="type here"
             className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-blue-400"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
           />
         </div>
 
@@ -60,6 +85,8 @@ const SignupModal = ({ close }) => {
             type="password"
             placeholder="type here"
             className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-blue-400"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
           />
         </div>
 
@@ -75,7 +102,7 @@ const SignupModal = ({ close }) => {
         </p>
 
         {/* Button */}
-        <button className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-2 rounded-md font-medium hover:opacity-90 transition">
+        <button className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-2 rounded-md font-medium hover:opacity-90 transition" onClick={handleSignup}>
           Signup
         </button>
       </div>
