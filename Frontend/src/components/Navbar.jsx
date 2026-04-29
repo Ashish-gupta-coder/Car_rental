@@ -5,6 +5,7 @@ import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../Auth/Login";
 import { userDataContext } from "../Context/Current_user";
+import axios from "axios";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -16,13 +17,18 @@ const Navbar = () => {
 
   // ✅ First letter avatar
   const getInitial = () => {
-    return userData?.userName?.charAt(0).toUpperCase() || "U";
+    return userData?.userName?.charAt(0).toUpperCase() || "P";
   };
 
   // ✅ Logout
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await axios.post("/api/auth/logout", {}, { withCredentials: true });
+    } catch (error) {
+      console.log(error);
+    }
+
     setUserData(null);
-    localStorage.removeItem("user");
     setShowDropdown(false);
     navigate("/");
   };
@@ -33,15 +39,15 @@ const Navbar = () => {
 
         {/* Logo */}
         <div className="flex cursor-pointer" onClick={() => navigate("/")}>
-          <img src={assets.logo} alt="" className="w-44" />
+          <img src={assets.logo} alt="logo" className="w-44" />
         </div>
 
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center gap-8">
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
             <li onClick={() => navigate("/")} className="cursor-pointer hover:text-blue-600">Home</li>
-            <li onClick={() => navigate('/cars')} className="cursor-pointer hover:text-blue-600">Cars</li>
+            <li onClick={() => navigate("/cars")} className="cursor-pointer hover:text-blue-600">Cars</li>
             <li onClick={() => navigate("/bookings")} className="cursor-pointer hover:text-blue-600">My Bookings</li>
           </ul>
 
@@ -61,7 +67,7 @@ const Navbar = () => {
               List cars
             </p>
 
-            {/* ✅ PROFILE OR LOGIN */}
+            {/* ✅ AUTH SECTION */}
             {userData ? (
               <div className="relative">
 
@@ -77,11 +83,8 @@ const Navbar = () => {
                 {showDropdown && (
                   <div className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg">
 
-                    {/* User Info */}
                     <div className="px-4 py-2 border-b">
-                      <p className="font-medium">
-                        {userData.userName}
-                      </p>
+                      <p className="font-medium">{userData?.userName}</p>
                     </div>
 
                     <p
@@ -138,7 +141,7 @@ const Navbar = () => {
                 {getInitial()}
               </div>
 
-              <p className="font-medium">{userData.userName}</p>
+              <p className="font-medium">{userData?.userName}</p>
 
               <p onClick={() => navigate("/profile")}>Profile</p>
               <p onClick={handleLogout} className="text-red-500">Logout</p>

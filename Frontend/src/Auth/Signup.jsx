@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { authContext } from "../Context/auth_context";
+import { userDataContext } from "../Context/Current_user";
 const SignupModal = ({ close }) => {
   const [showLogin, setShowLogin] = useState(false); 
   const navigate = useNavigate()
@@ -11,6 +12,8 @@ const SignupModal = ({ close }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let {serverUrl} = useContext(authContext)
+    let {userData, setUserData} = useContext(userDataContext)
+  
   if (showLogin) {
     return <LoginModal close={close} />;
   }
@@ -24,6 +27,7 @@ const handleSignup = async () => {
     });
 
     console.log(result.data);
+    setUserData(result.data); // Update user data in context
     close(); // Close the signup modal
   } catch (error) {
     console.error("Error during signup:", error.response?.data || error.message);

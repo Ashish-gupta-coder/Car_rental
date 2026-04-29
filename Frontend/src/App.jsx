@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './main_page/Home';
 import Footer from './components/Footer';
@@ -11,22 +11,22 @@ import SignupModal from './Auth/Signup';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar/>
+    <>
+      <Navbar />
 
-      {/* Add padding-top to avoid navbar overlap */}
       <div className="pt-16">
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/cars' element={<Car/>} />
-           <Route path="/car/:id" element={<CarDetails />} />
-           <Route path="/bookings" element={<MyBookings />} />
-           <Route path="/login" element={<LoginModal />} />
-           <Route path="/signup" element={<SignupModal />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/cars' element={<Car />} />
+          <Route path="/car/:id" element={<CarDetails />} />
+          <Route path="/bookings" element={<MyBookings />} />
+          <Route path="/login" element={<LoginModal />} />
+          <Route path="/signup" element={<SignupModal />} />
         </Routes>
       </div>
-<Footer/>
-    </BrowserRouter>
+
+      <Footer />
+    </>
   )
 }
 

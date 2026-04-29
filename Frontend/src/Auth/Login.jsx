@@ -3,9 +3,11 @@ import SignupModal from "./Signup";
 import { authContext } from "../Context/auth_context";
 import { useContext } from "react";
 import axios from "axios";
+import { userDataContext } from "../Context/Current_user";
 
 const LoginModal = ({ close }) => {
   const [showSignup, setShowSignup] = useState(false);
+  let {userData, setUserData} = useContext(userDataContext)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     let {serverUrl} = useContext(authContext) 
@@ -23,6 +25,7 @@ const handleLogin = async () => {
     });
 
     console.log(result.data);
+    setUserData(result.data); // Update user data in context
     close(); // Close the login modal
   } catch (error) {
     console.error("Error during signup:", error.response?.data || error.message);

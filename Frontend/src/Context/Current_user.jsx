@@ -1,30 +1,37 @@
-import React, { createContext, useEffect, useState } from "react";
+import axios from "axios";
+import React, { createContext, useEffect, useState, useContext } from "react";
+import { authContext } from "./auth_context";
 
 export const userDataContext = createContext();
 
 function Current_user({ children }) {
+  const { serverUrl } = useContext(authContext);
 
-  // ✅ Load from localStorage
-  const [userData, setUserData] = useState(() => {
-    const saved = localStorage.getItem("user");
-    return saved ? JSON.parse(saved) : null;
-  });
+  const [userData, setUserData] = useState(null);
 
-  const [loading, setLoading] = useState(false); // no API → no loading needed
+  const getCurrentUser = async () => {
+    try {
+      const result = await axios.get(
+        serverUrl + "/api/user/currentuser",
+        { withCredentials: true }
+      );
 
-  // ✅ Save to localStorage
-  useEffect(() => {
-    if (userData) {
-      localStorage.setItem("user", JSON.stringify(userData));
-    } else {
-      localStorage.removeItem("user");
+      setUserData(result.data);
+    } catch (error) {
+      setUserData(null);
+      console.error("Error fetching current user:", error);
     }
-  }, [userData]);
+  };
+
+  // ✅ correct place for useEffect
+  useEffect(() => {
+    getCurrentUser();
+  }, [serverUrl]);
 
   const value = {
     userData,
     setUserData,
-    loading,
+    getCurrentUser,
   };
 
   return (
