@@ -139,15 +139,12 @@ const CarDetails = () => {
           {/* Features */}
           <h2 className="text-xl font-semibold mt-8">Features</h2>
           <div className="grid grid-cols-2 gap-4 mt-4">
-
             <div className="flex items-center gap-2 text-gray-700">
               <MdOutlineGpsFixed className="text-blue-600" /> GPS
             </div>
-
             <div className="flex items-center gap-2 text-gray-700">
               <MdBluetooth className="text-blue-600" /> Bluetooth
             </div>
-
             <div className="flex items-center gap-2 text-gray-700">
               <TbAirConditioning className="text-blue-600" /> Air Conditioning
             </div>
